@@ -44,8 +44,8 @@ def main():
         message = {'datetime': datetime.now().__str__(), 'iteration': i} 
         attributes = {'messageId': str(uuid.uuid4()), 'iteration': i}
         
-        print(json.dumps(message))
-        print(json.dumps(attributes))
+        # print(json.dumps(message))
+        # print(json.dumps(attributes))
     
         if user.are_temporary_credentials_valid() is False:
             temp_credentials = user.get_temporary_credentials(True)

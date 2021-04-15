@@ -104,11 +104,11 @@ class CognitoUser:
         if self._credentials is None:
             return False
         
-        issued = self._credentials['Credentials']['Expiration']
+        expired = self._credentials['Credentials']['Expiration']
         now = datetime.now(tzlocal())
-        
+
         #datetime.datetime(2021, 4, 13, 12, 2, 52, tzinfo=tzlocal())
-        if now > issued:
+        if now < expired:
             valid = True
         else:
             valid = False
