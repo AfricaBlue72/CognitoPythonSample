@@ -36,13 +36,11 @@ class CognitoUser:
         try:
             if self._cognitoUser is not None:
                 self._cognitoUser.authenticate(self.password)
-                
-            print("Signed in")
+                print("Signed in")
         except Exception as e:
             exception_type = type(e).__name__
             print(exception_type)
-            print(e)
-            
+            print(e)    
         
     def get_open_id_token(self):
         try:
@@ -84,6 +82,8 @@ class CognitoUser:
                         } )
                         
                 identity_id = identity_details['IdentityId']
+                print(f'Identity: {identity_id}')
+                print(json.dumps(open_id_token))
                 
                 # Get temporary credentials
                 if open_id_token is not None and identity_id is not None:
@@ -93,6 +93,9 @@ class CognitoUser:
                         Logins={
                             provider: open_id_token
                         } )
+                    print('Got credentials')
+                # else:
+                #     raise 
             except Exception as e:
                 exception_type = type(e).__name__
                 print(exception_type)
@@ -102,6 +105,7 @@ class CognitoUser:
     
     def are_temporary_credentials_valid(self):
         if self._credentials is None:
+            print('No creds')
             return False
         
         expired = self._credentials['Credentials']['Expiration']
